@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Adoption Site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h2 class="logo">🐾 Adoption<span>Hub</span></h2>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#pet">Adopt</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Adopt A <span>Pet</span> Today</h1>
+    <p>Give them a home, and they'll give you unconditional love ❤️</p>
+    <a href="#pet" class="btn">Find a Friend</a>
+  </section>
+
+  <!-- Search & Filter -->
+  <div class="search-filter">
+    <input type="text" id="search" placeholder="🔍 Search pets by name...">
+    <select id="filter">
+      <option value="all">All Pets</option>
+      <option value="cat">Cats</option>
+      <option value="dog">Dogs</option>
+    </select>
+  </div>
+
+  <!-- Pet Cards -->
+  <div id="pet" class="pet-container">
+    <div class="card" data-type="cat">
+      <img src="cat.jpg" alt="Jerry the Cat"/>
+      <h3>Meet Jerry</h3>
+      <p>
+        Jerry is a charming and friendly <b>cat</b> with a heart of gold. 
+        He is looking for a loving forever home.
+      </p>
+      <a href="adopt.html?pet=Jerry" class="btn adopt-btn">Adopt Jerry</a>
+    </div>
+
+    <div class="card" data-type="dog">
+      <img src="dog.jpg" alt="Tom the Dog"/>
+      <h3>Meet Tom</h3>
+      <p>
+        Tom is a loyal and playful <b>dog</b> who loves attention 
+        and companionship. A true best friend waiting for you!
+      </p>
+      <a href="adopt.html?pet=Tom" class="btn adopt-btn">Adopt Tom</a>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      We are a non-profit organization dedicated to finding loving homes for 
+      abandoned and rescued pets. Every adoption gives a pet a second chance at life.
+    </p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: contact@adoptionhub.com | Phone: +91-9876543210</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AdoptionHub | A Gift of New Life 🐶🐱</p>
+  </footer>
+
+  <!-- Script for Search & Filter -->
+  <script>
+    const searchInput = document.getElementById("search");
+    const filterSelect = document.getElementById("filter");
+    const cards = document.querySelectorAll(".card");
+
+    function filterPets() {
+      const searchText = searchInput.value.toLowerCase();
+      const filterType = filterSelect.value;
+
+      cards.forEach(card => {
+        const petName = card.querySelector("h3").innerText.toLowerCase();
+        const petDesc = card.querySelector("p").innerText.toLowerCase();
+        const petType = card.getAttribute("data-type");
+
+        if (
+          (petName.includes(searchText) || petDesc.includes(searchText)) &&
+          (filterType === "all" || filterType === petType)
+        ) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    searchInput.addEventListener("input", filterPets);
+    filterSelect.addEventListener("change", filterPets);
+  </script>
+
+</body>
+</html>
